@@ -7,6 +7,8 @@ OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
 EXE = bin/morpion
 
 all: $(EXE)
+run: all
+	./$(EXE)
 
 $(EXE): $(OBJS)
 	@mkdir -p bin

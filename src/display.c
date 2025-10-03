@@ -43,11 +43,14 @@ void presentation_players(Player *player1, Player *player2)
     printf("Le joueur 2 est %s\n", player2->name);
 }
 
-int get_number_games(void)
+unsigned char get_number_games(void)
 {
-    int number = 0;
+    unsigned char number = 0;
     printf("Entrez le nombre de parties que vous voulez faire : ");
-    scanf("%d", &number);
-    printf("\n\nDonc c'est partie pour %d parties !\n", number);
+    scanf("%hhu", &number);
+
+    if (number != 0)
+        printf("\n\nDonc c'est partie pour %d parties !\n", number);
+    
     return number;
 }

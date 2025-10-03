@@ -13,8 +13,8 @@ void increment_score(Player *player)
 void start_game()
 {
     char players[2][64];
-    int random_1_player;
-    int number_of_games;
+    unsigned char random_1_player;
+    unsigned char number_of_games;
 
     Player player1 = { "", 'X', 0 };
     Player player2 = { "", 'O', 0 };
@@ -29,4 +29,7 @@ void start_game()
 
     presentation_players(&player1, &player2);
     number_of_games = get_number_games();
+    
+    if (number_of_games == 0) 
+        return;
 }
