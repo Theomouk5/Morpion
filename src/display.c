@@ -46,11 +46,51 @@ void presentation_players(Player *player1, Player *player2)
 unsigned char get_number_games(void)
 {
     unsigned char number = 0;
-    printf("Entrez le nombre de parties que vous voulez faire : ");
+    printf("\n\nEntrez le nombre de parties que vous voulez faire : ");
     scanf("%hhu", &number);
 
-    if (number != 0)
+    if (number > 0 && number < 20)
         printf("\n\nDonc c'est partie pour %d parties !\n", number);
     
     return number;
+}
+
+void display_morpion(char morpion[3][3])
+{
+    system("clear");
+    printf("Voici la position actuelle du morpion\n\n\n");
+
+    int i;
+    int j;
+
+    for (i = 0; i < 3; i++)
+    {
+        printf("        ");
+
+        for (j = 0; j < 3; j++)
+        {
+            printf("| %c ", morpion[i][j]);
+        }
+
+        printf("|\n");
+
+        if (i != 2)
+            printf("        -------------\n");
+    }
+
+}
+
+unsigned char ask_new_character(Player *player)
+{
+    while(1) {
+        unsigned char selected;
+        printf("\n\nAu tour de %s pour cette manche\n", player->name);
+        printf("%s, quelle case voulez-vous choisir : ", player->name);
+        scanf("%hhd", &selected);
+
+        if (selected > 9)
+            continue;
+
+        return selected;
+    }
 }
