@@ -12,7 +12,9 @@ typedef struct Player {
     unsigned char score;
 } Player;
 
-void increment_score(Player *player);
+void clear_morpion(char morpion[3][3]);
+void increment_score(char morpion[3][3], Player *player);
+void one_round(char morpion[3][3], Player *player);
 void start_game();
 
 #endif

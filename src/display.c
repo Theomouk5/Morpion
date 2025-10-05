@@ -55,9 +55,16 @@ unsigned char get_number_games(void)
     return number;
 }
 
+void display_score(Player *player1, Player *player2)
+{	
+    system("clear");
+    printf("#####################SCORE####################\n\n");
+    printf("	   %s : %hhu             %s : %hhu\n\n", player1->name, player1->score, player2->name, player2->score);
+    printf("##############################################\n\n");
+}
+
 void display_morpion(char morpion[3][3])
 {
-    system("clear");
     printf("Voici la position actuelle du morpion\n\n\n");
 
     int i;
@@ -93,4 +100,9 @@ unsigned char ask_new_character(Player *player)
 
         return selected;
     }
+}
+
+void winner(Player *player)
+{
+    system("clear");
 }

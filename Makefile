@@ -1,5 +1,5 @@
 CC = gcc
-C_FLAGS = -Iinclude --std=c99 -c
+C_FLAGS = -g -Iinclude --std=c99 -c
 
 SRCS = $(wildcard src/*.c)
 OBJS = $(patsubst src/%.c, build/%.o, $(SRCS))
