@@ -95,7 +95,7 @@ unsigned char ask_new_character(Player *player)
         printf("%s, quelle case voulez-vous choisir : ", player->name);
         scanf("%hhd", &selected);
 
-        if (selected > 9)
+        if (selected > 9 || selected < 1)
             continue;
 
         return selected;

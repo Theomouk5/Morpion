@@ -19,8 +19,9 @@ void clear_morpion(char morpion[3][3])
     }
 }
 
-void increment_score(char morpion[3][3], Player *player)
+void increment_score(char morpion[3][3], Player *player, Bool *round_is_win)
 {
+    *round_is_win = True;
     clear_morpion(morpion);
     player->score++;
 }
@@ -71,8 +72,8 @@ void start_game()
     };
 
     Bool round_is_win = False;
-    Player player1 = { "", 'X', 0 };
-    Player player2 = { "", 'O', 0 };
+    Player player1 = { "", 'X', 1 };
+    Player player2 = { "", 'O', 1 };
     
     int i;
 
@@ -90,7 +91,7 @@ void start_game()
     if (number_of_games <= 0 || number_of_games >= 20) 
         return;
     
-    while (player1.score + player2.score != number_of_games)
+    while (player1.score + player2.score < number_of_games)
     {
         while (1)
         {
@@ -115,12 +116,10 @@ golden_round:
                 {
                     if (morpion[i][0] == player1.symbole)
                     {
-                        increment_score(morpion, &player1);
-                        break;
+                        increment_score(morpion, &player1, &round_is_win);
                     }
 
-                    increment_score(morpion, &player2);
-                    break;
+                    increment_score(morpion, &player2, &round_is_win);
                 }
             }
 
@@ -131,28 +130,29 @@ golden_round:
                 {
                     if (morpion[0][i] == player1.symbole)
                     {
-                        increment_score(morpion, &player1);
-                        break;
+                        increment_score(morpion, &player1, &round_is_win);
                     }
                     
-                    increment_score(morpion, &player2);
-                    break;
+                    increment_score(morpion, &player2, &round_is_win);
                 }
             }
 
             // Check diagonals
-            if (morpion[1][1] != player1.symbole || morpion[1][1] != player2.symbole)
-                break;
-
             if ((morpion[1][1] == morpion[0][0] && morpion[1][1] == morpion[2][2]) || (morpion[1][1] == morpion[0][2] && morpion[1][1] == morpion[2][0]))
             {
                 if (morpion[1][1] == player1.symbole)
                 {
-                    increment_score(morpion, &player1);
-                    break;
+                    increment_score(morpion, &player1, &round_is_win);
                 }
+                else if (morpion[1][1] == player2.symbole)
+                {
+                    increment_score(morpion, &player2, &round_is_win);
+                }
+            }
 
-                increment_score(morpion, &player2);
+            if (round_is_win == True)
+            {
+                round_is_win = False;
                 break;
             }
         }
