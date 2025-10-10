@@ -104,5 +104,7 @@ unsigned char ask_new_character(Player *player)
 
 void winner(Player *player)
 {
+    printf("");
+
     system("clear");
 }

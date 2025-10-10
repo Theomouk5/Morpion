@@ -7,8 +7,7 @@
 
 void clear_morpion(char morpion[3][3])
 {
-    int i;
-    int j;
+    int i, j;
 
     for (i = 0; i < 3; i++)
     {
@@ -17,6 +16,24 @@ void clear_morpion(char morpion[3][3])
             morpion[i][j] = ' ';
         }
     }
+}
+
+void verif_full(char morpion[3][3], Player *player1, Player *player2)
+{
+    int i, j;
+    
+    for(i = 0; i < 3; i++)
+    {
+        for(j = 0; j < 3; j++)
+        {
+            if (morpion[i][j] != player1->symbole && morpion[i][j] != player2->symbole)
+            {
+                return;
+            }
+        }
+    }
+
+    clear_morpion(morpion);
 }
 
 void increment_score(char morpion[3][3], Player *player, Bool *round_is_win)
@@ -72,8 +89,8 @@ void start_game()
     };
 
     Bool round_is_win = False;
-    Player player1 = { "", 'X', 1 };
-    Player player2 = { "", 'O', 1 };
+    Player player1 = { "", 'X', 0 };
+    Player player2 = { "", 'O', 0 };
     
     int i;
 
@@ -96,6 +113,8 @@ void start_game()
         while (1)
         {
 golden_round:
+            verif_full(morpion, &player1, &player2);
+
             if (who_play == 1)
             {
                 display_score(&player1, &player2);
